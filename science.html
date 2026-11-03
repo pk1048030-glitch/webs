@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>12th Science Notes — Pankaj Science Hub</title>
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <style>
+    :root {
+      --accent: #38bdf8;
+      --accent2: #0ea5e9;
+      --text: #e8f3ff;
+      --muted: #9eb4c7;
+      --bg1: #0b0f1c;
+      --bg2: #10172b;
+    }
+    body {
+      background: var(--bg1);
+      color: var(--text);
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+    /* SPLASH SCREEN */
+    #splash {
+      position: fixed;
+      inset: 0;
+      background: #000;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 200;
+      animation: fadeSplash 1.8s forwards;
+    }
+    @keyframes fadeSplash {
+      0% { opacity: 1; }
+      80% { opacity: 1; }
+      100% { opacity: 0; visibility: hidden; }
+    }
+    #splashLogo {
+      font-size: 3rem;
+      font-weight: 700;
+      background: linear-gradient(90deg, #00eaff, #0080ff);
+      -webkit-background-clip: text;
+      color: transparent;
+      animation: pulse 1.5s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.15); }
+    }
+    /* LOGIN PAGE */
+    #loginPage {
+      position: fixed;
+      inset: 0;
+      z-index: 150;
+      background: rgba(0, 0, 0, 0.85);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .loginBox {
+      background: rgba(255, 255, 255, 0.08);
+      padding: 30px;
+      border-radius: 18px;
+      backdrop-filter: blur(10px);
+      width: 90%;
+      max-width: 360px;
+      text-align: center;
+      animation: fadeIn .6s;
+    }
+    .loginInput {
+      width: 100%;
+      padding: 12px;
+      margin-top: 12px;
+      border-radius: 10px;
+      border: 0;
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
+      font-size: 1rem;
+    }
+    .loginBtn {
+      margin-top: 16px;
+      width: 100%;
+      padding: 12px;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      border: 0;
+      border-radius: 10px;
+      font-weight: 700;
+      color: #00111d;
+      cursor: pointer;
+    }
+    #mainLogo {
+      text-align: center;
+      margin-top: 25px;
+      font-size: 2.2rem;
+      background: linear-gradient(90deg, #00eaff, #00ff95);
+      -webkit-background-clip: text;
+      color: transparent;
+      font-weight: 800;
+    }
+    .sci-container {
+      margin: 30px auto 50px;
+      width: 92%;
+      max-width: 920px;
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+      padding: 30px;
+      border-radius: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .sci-container h1 {
+      text-align: center;
+      margin-bottom: 10px;
+      font-size: 1.8rem;
+    }
+    .lead {
+      text-align: center;
+      margin-bottom: 24px;
+      color: var(--muted);
+    }
+    /* SUBJECT CARDS */
+    .subjectGrid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 15px;
+      margin-bottom: 25px;
+    }
+    .subCard {
+      background: rgba(255, 255, 255, 0.08);
+      padding: 18px;
+      border-radius: 14px;
+      text-align: center;
+      cursor: pointer;
+      text-decoration: none;
+      color: var(--text);
+      display: block;
+      transition: all .3s ease;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    .subCard:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 0 20px rgba(0, 200, 255, 0.4);
+      background: rgba(255, 255, 255, 0.12);
+    }
+    .subIcon {
+      font-size: 34px;
+      margin-bottom: 8px;
+    }
+    .subTitle {
+      font-weight: 700;
+      font-size: 1.05rem;
+    }
+    .subSub {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+    /* NOTES CARD */
+    .card {
+      background: rgba(255, 255, 255, 0.07);
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 22px;
+      display: flex;
+      gap: 20px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .card .icon {
+      width: 60px;
+      height: 60px;
+      border-radius: 14px;
+      background: linear-gradient(130deg, var(--accent), var(--accent2));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      color: #00111d;
+      font-weight: 700;
+    }
+    .card .meta {
+      flex: 1;
+    }
+    .card .actions {
+      margin-left: auto;
+    }
+    .btn {
+      padding: 12px 24px;
+      border: 0;
+      border-radius: 10px;
+      background: linear-gradient(120deg, #00d9ff, #00ffa6);
+      color: #00111d;
+      font-weight: 700;
+      cursor: pointer;
+      transition: 0.2s ease;
+    }
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 15px rgba(0, 217, 255, 0.4);
+    }
+    /* DRIVE PREVIEW */
+    #previewBox {
+      margin-top: 26px;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+    }
+    #previewBox iframe {
+      width: 100%;
+      height: 480px;
+      border: 0;
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <nav>
+      <div class="logo">🌟 Pankaj Kumar 🌟</div>
+      <div class="search-box">
+        <input type="text" id="searchInput" placeholder="Search science hub...">
+      </div>
+      <ul id="menuList">
+        <li><a href="index.html">🏠 Home</a></li>
+        <li><a href="about.html">👤 About</a></li>
+        <li><a href="books.html">📚 12th Books</a></li>
+        <li><a href="modelspaper.html">🗞️ Model Papers</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- SPLASH -->
+  <div id="splash">
+    <div id="splashLogo">Pankaj Notes</div>
+  </div>
+
+  <!-- LOGIN -->
+  <div id="loginPage">
+    <div class="loginBox">
+      <h2>Welcome to Science Hub</h2>
+      <input class="loginInput" id="user" placeholder="Apna naam daalein" />
+      <button class="loginBtn" onclick="loginNow()">Continue</button>
+    </div>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <div id="mainContent" style="display:none;">
+    <div id="mainLogo">📘 Pankaj Science Hub</div>
+    <div class="sci-container">
+      <h1>12th Science Notes & Subjects</h1>
+      <p class="lead">Subjects, Notes, VVI Question Bank & Drive Preview — सब कुछ एक ही जगह।</p>
+      
+      <!-- SUBJECT CARDS (Clickable directly to each subject page!) -->
+      <div class="subjectGrid">
+        <a href="che.html" class="subCard">
+          <div class="subIcon">🧪</div>
+          <div class="subTitle">Chemistry</div>
+          <div class="subSub">VVI & 2026 Master Plan</div>
+        </a>
+        <a href="math.html" class="subCard">
+          <div class="subIcon">📐</div>
+          <div class="subTitle">Maths</div>
+          <div class="subSub">VVI Questions & Formulas</div>
+        </a>
+        <a href="bio.html" class="subCard">
+          <div class="subIcon">🧬</div>
+          <div class="subTitle">Biology</div>
+          <div class="subSub">Top Questions & Diagrams</div>
+        </a>
+        <a href="phy.html" class="subCard">
+          <div class="subIcon">⚡</div>
+          <div class="subTitle">Physics</div>
+          <div class="subSub">VVI Questions & Laws</div>
+        </a>
+      </div>
+
+      <!-- NOTES OPENER -->
+      <section class="card">
+        <div class="icon">📂</div>
+        <div class="meta">
+          <h2>Notes Drive Folder</h2>
+          <p>12th Science 🧪 Complete Notes Collection</p>
+        </div>
+        <div class="actions">
+          <button class="btn" onclick="openDrive()">Open in Drive</button>
+        </div>
+      </section>
+
+      <!-- DRIVE PREVIEW -->
+      <div id="previewBox">
+        <iframe src="https://drive.google.com/embeddedfolderview?id=1DuC15qv6YUK8IJpPqiF0jXI1Sd7C3nCT#list"></iframe>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function loginNow() {
+      let name = document.getElementById("user").value.trim();
+      if (name.length < 2) {
+        alert("Kripya apna sahi naam darj karein");
+        return;
+      }
+      document.getElementById("loginPage").style.display = "none";
+      document.getElementById("mainContent").style.display = "block";
+    }
+
+    function openDrive() {
+      window.open("https://drive.google.com/drive/folders/1DuC15qv6YUK8IJpPqiF0jXI1Sd7C3nCT", "_blank");
+    }
+  </script>
+  <script src="/assets/js/search.js"></script>
+</body>
+</html>
