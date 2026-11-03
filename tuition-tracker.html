@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -21,8 +21,11 @@
         @keyframes slideInRight { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
         @keyframes slideOutRight { from { transform: translateX(0); opacity: 1; } to { transform: translateX(100%); opacity: 0; } }
     </style>
+  <link rel="stylesheet" href="/assets/css/main.css">
 </head>
 <body class="bg-slate-50 text-slate-800 flex h-screen overflow-hidden selection:bg-indigo-200">
+  <div id="portal-header"></div>
+
 
 
     <!-- Desktop Sidebar -->
@@ -1072,5 +1075,7 @@
 
 
     </script>
+  <div id="portal-footer"></div>
+  <script src="/assets/js/layout.js"></script>
 </body>
 </html>

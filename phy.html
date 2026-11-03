@@ -67,6 +67,8 @@
   <link rel="stylesheet" href="/assets/css/main.css">
 </head>
 <body class="flex flex-col min-h-screen relative">
+  <div id="portal-header"></div>
+
 
     <!-- Quiz Modal (Hidden by default) -->
     <div id="quiz-modal" class="fixed inset-0 bg-black bg-opacity-50 z-[100] hidden flex items-center justify-center px-4">
@@ -191,12 +193,7 @@
 
     </main>
 
-    <footer class="bg-gray-800 text-gray-300 py-8">
-        <div class="max-w-7xl mx-auto px-4 text-center">
-            <p class="mb-2">Bihar Board 12th Exam Preparation Tool</p>
-            <p class="text-sm text-gray-500">All the best for your Physics Exam! 🚀</p>
-        </div>
-    </footer>
+    <div id="portal-footer"></div>
 
     <script>
         // --- Gemini API Setup ---
@@ -702,5 +699,6 @@
 
     </script>
   <script src="/assets/js/search.js"></script>
+  <script src="/assets/js/layout.js"></script>
 </body>
 </html>

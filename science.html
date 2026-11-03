@@ -3,22 +3,29 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>12th Science Notes — Pankaj Science Hub</title>
+  <title>12th Science Hub — Unified Multi-Tab VVI Study Center</title>
   <link rel="stylesheet" href="/assets/css/main.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
       --accent: #38bdf8;
       --accent2: #0ea5e9;
-      --text: #e8f3ff;
-      --muted: #9eb4c7;
+      --text: #f1f5f9;
+      --muted: #94a3b8;
       --bg1: #0b0f1c;
       --bg2: #10172b;
+      --glass-bg: rgba(255, 255, 255, 0.05);
+      --glass-border: rgba(255, 255, 255, 0.1);
+      --glass-hover: rgba(255, 255, 255, 0.1);
     }
     body {
-      background: var(--bg1);
+      background: radial-gradient(circle at 50% 10%, #1e1b4b 0%, #0b0f1c 70%);
       color: var(--text);
-      overflow-x: hidden;
+      font-family: 'Plus Jakarta Sans', sans-serif;
       min-height: 100vh;
+      overflow-x: hidden;
     }
     /* SPLASH SCREEN */
     #splash {
@@ -30,7 +37,7 @@
       align-items: center;
       justify-content: center;
       z-index: 200;
-      animation: fadeSplash 1.8s forwards;
+      animation: fadeSplash 1.6s forwards;
     }
     @keyframes fadeSplash {
       0% { opacity: 1; }
@@ -38,277 +45,754 @@
       100% { opacity: 0; visibility: hidden; }
     }
     #splashLogo {
+      font-family: 'Outfit', sans-serif;
       font-size: 3rem;
-      font-weight: 700;
+      font-weight: 800;
       background: linear-gradient(90deg, #00eaff, #0080ff);
       -webkit-background-clip: text;
       color: transparent;
-      animation: pulse 1.5s infinite;
+      animation: pulse 1.4s infinite;
     }
     @keyframes pulse {
       0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.15); }
+      50% { transform: scale(1.12); }
     }
     /* LOGIN PAGE */
     #loginPage {
       position: fixed;
       inset: 0;
       z-index: 150;
-      background: rgba(0, 0, 0, 0.85);
+      background: rgba(11, 15, 28, 0.88);
+      backdrop-filter: blur(8px);
       display: flex;
       align-items: center;
       justify-content: center;
     }
     .loginBox {
-      background: rgba(255, 255, 255, 0.08);
-      padding: 30px;
-      border-radius: 18px;
-      backdrop-filter: blur(10px);
+      background: rgba(255, 255, 255, 0.06);
+      padding: 34px 28px;
+      border-radius: 20px;
+      backdrop-filter: blur(12px);
       width: 90%;
-      max-width: 360px;
+      max-width: 380px;
       text-align: center;
-      animation: fadeIn .6s;
+      border: 1px solid var(--glass-border);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+      animation: fadeIn .5s;
     }
     .loginInput {
       width: 100%;
-      padding: 12px;
-      margin-top: 12px;
-      border-radius: 10px;
-      border: 0;
-      background: rgba(255, 255, 255, 0.1);
+      padding: 13px 16px;
+      margin-top: 14px;
+      border-radius: 12px;
+      border: 1px solid var(--glass-border);
+      background: rgba(255, 255, 255, 0.08);
       color: white;
       font-size: 1rem;
+      outline: none;
+    }
+    .loginInput:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 10px rgba(56, 189, 248, 0.4);
     }
     .loginBtn {
-      margin-top: 16px;
+      margin-top: 18px;
       width: 100%;
-      padding: 12px;
-      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      padding: 13px;
+      background: linear-gradient(90deg, #38bdf8, #6366f1);
       border: 0;
-      border-radius: 10px;
+      border-radius: 12px;
       font-weight: 700;
-      color: #00111d;
+      font-size: 1rem;
+      color: #ffffff;
       cursor: pointer;
+      transition: all 0.25s ease;
     }
-    #mainLogo {
+    .loginBtn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(99, 102, 241, 0.4);
+    }
+    /* MAIN CONTAINER */
+    .hub-wrapper {
+      max-width: 1180px;
+      margin: 30px auto 60px;
+      padding: 0 20px;
+    }
+    .hub-hero {
       text-align: center;
-      margin-top: 25px;
-      font-size: 2.2rem;
-      background: linear-gradient(90deg, #00eaff, #00ff95);
-      -webkit-background-clip: text;
-      color: transparent;
-      font-weight: 800;
-    }
-    .sci-container {
-      margin: 30px auto 50px;
-      width: 92%;
-      max-width: 920px;
-      background: rgba(255, 255, 255, 0.05);
-      backdrop-filter: blur(10px);
-      padding: 30px;
-      border-radius: 20px;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-    }
-    .sci-container h1 {
-      text-align: center;
-      margin-bottom: 10px;
-      font-size: 1.8rem;
-    }
-    .lead {
-      text-align: center;
-      margin-bottom: 24px;
-      color: var(--muted);
-    }
-    /* SUBJECT CARDS */
-    .subjectGrid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-      gap: 15px;
       margin-bottom: 25px;
     }
-    .subCard {
-      background: rgba(255, 255, 255, 0.08);
-      padding: 18px;
-      border-radius: 14px;
-      text-align: center;
-      cursor: pointer;
-      text-decoration: none;
-      color: var(--text);
-      display: block;
-      transition: all .3s ease;
-      border: 1px solid rgba(255, 255, 255, 0.05);
-    }
-    .subCard:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 0 20px rgba(0, 200, 255, 0.4);
-      background: rgba(255, 255, 255, 0.12);
-    }
-    .subIcon {
-      font-size: 34px;
+    .hub-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: clamp(2rem, 4vw, 2.8rem);
+      font-weight: 800;
+      background: linear-gradient(90deg, #38bdf8, #818cf8, #c084fc);
+      -webkit-background-clip: text;
+      color: transparent;
       margin-bottom: 8px;
     }
-    .subTitle {
-      font-weight: 700;
-      font-size: 1.05rem;
-    }
-    .subSub {
-      font-size: 0.8rem;
+    .hub-subtitle {
       color: var(--muted);
-      margin-top: 4px;
+      font-size: 1.05rem;
+      max-width: 650px;
+      margin: 0 auto;
     }
-    /* NOTES CARD */
-    .card {
-      background: rgba(255, 255, 255, 0.07);
-      border-radius: 16px;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      padding: 22px;
+    /* SUBJECT SWITCHER TABS */
+    .subject-nav-tabs {
       display: flex;
-      gap: 20px;
+      gap: 10px;
+      overflow-x: auto;
+      padding: 10px 4px;
+      margin: 25px 0 20px;
+      scrollbar-width: none;
+    }
+    .subject-nav-tabs::-webkit-scrollbar {
+      display: none;
+    }
+    .tab-btn {
+      padding: 10px 18px;
+      border-radius: 12px;
+      border: 1px solid var(--glass-border);
+      background: rgba(255, 255, 255, 0.05);
+      color: #cbd5e1;
+      font-weight: 600;
+      font-size: 0.95rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      white-space: nowrap;
+      transition: all 0.2s ease;
+      backdrop-filter: blur(6px);
+    }
+    .tab-btn:hover {
+      background: rgba(255, 255, 255, 0.12);
+      color: #ffffff;
+      transform: translateY(-2px);
+    }
+    .tab-btn.active {
+      background: linear-gradient(135deg, #4f46e5, #0284c7);
+      color: #ffffff;
+      border-color: #60a5fa;
+      box-shadow: 0 4px 15px rgba(2, 132, 199, 0.4);
+    }
+    /* GLASS PANEL */
+    .glass-panel {
+      background: var(--glass-bg);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid var(--glass-border);
+      border-radius: 20px;
+      padding: 28px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
+      animation: fadeIn 0.35s ease;
+    }
+    .panel-header {
+      display: flex;
+      justify-content: space-between;
       align-items: center;
       flex-wrap: wrap;
+      gap: 16px;
+      margin-bottom: 20px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     }
-    .card .icon {
-      width: 60px;
-      height: 60px;
-      border-radius: 14px;
-      background: linear-gradient(130deg, var(--accent), var(--accent2));
+    .panel-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: #f8fafc;
+    }
+    .panel-meta {
       display: flex;
       align-items: center;
-      justify-content: center;
-      font-size: 28px;
-      color: #00111d;
+      gap: 12px;
+    }
+    .progress-badge {
+      background: rgba(56, 189, 248, 0.15);
+      color: #38bdf8;
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      padding: 6px 14px;
+      border-radius: 20px;
       font-weight: 700;
+      font-size: 0.88rem;
     }
-    .card .meta {
-      flex: 1;
-    }
-    .card .actions {
-      margin-left: auto;
-    }
-    .btn {
-      padding: 12px 24px;
-      border: 0;
+    .action-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 16px;
       border-radius: 10px;
-      background: linear-gradient(120deg, #00d9ff, #00ffa6);
-      color: #00111d;
-      font-weight: 700;
-      cursor: pointer;
-      transition: 0.2s ease;
+      background: rgba(255, 255, 255, 0.1);
+      color: #ffffff;
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 600;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      transition: all 0.2s ease;
     }
-    .btn:hover {
+    .action-link:hover {
+      background: rgba(255, 255, 255, 0.2);
+      color: #ffe97f;
+    }
+    /* QUESTIONS GRID */
+    .question-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .q-card {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 14px;
+      padding: 20px;
+      transition: all 0.25s ease;
+    }
+    .q-card:hover {
+      background: rgba(255, 255, 255, 0.07);
+      border-color: rgba(56, 189, 248, 0.3);
       transform: translateY(-2px);
-      box-shadow: 0 4px 15px rgba(0, 217, 255, 0.4);
     }
-    /* DRIVE PREVIEW */
-    #previewBox {
-      margin-top: 26px;
+    .q-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+    .q-category {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: #38bdf8;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .q-chance {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: #34d399;
+      background: rgba(16, 185, 129, 0.15);
+      padding: 3px 10px;
+      border-radius: 20px;
+    }
+    .q-text-hi {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 4px;
+      line-height: 1.5;
+    }
+    .q-text-en {
+      font-size: 0.95rem;
+      color: #94a3b8;
+      margin-bottom: 14px;
+    }
+    .q-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      padding-top: 12px;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+    }
+    .hint-box {
+      display: none;
+      background: rgba(15, 23, 42, 0.7);
+      border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 10px;
+      padding: 14px;
+      margin-top: 12px;
+      font-size: 0.95rem;
+      color: #e2e8f0;
+      line-height: 1.6;
+    }
+    .hint-box.show {
+      display: block;
+      animation: fadeIn 0.25s ease;
+    }
+    .hint-btn {
+      background: transparent;
+      border: 1px solid rgba(56, 189, 248, 0.4);
+      color: #38bdf8;
+      padding: 6px 14px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      font-weight: 600;
+      transition: all 0.2s ease;
+    }
+    .hint-btn:hover {
+      background: rgba(56, 189, 248, 0.15);
+    }
+    .learn-btn {
+      background: transparent;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #cbd5e1;
+      padding: 6px 14px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      font-weight: 600;
+      transition: all 0.2s ease;
+    }
+    .learn-btn.learned {
+      background: rgba(16, 185, 129, 0.2);
+      border-color: #10b981;
+      color: #34d399;
+    }
+    /* DRIVE NOTES PREVIEW */
+    .drive-container {
+      margin-top: 30px;
       border-radius: 16px;
       overflow: hidden;
-      border: 1px solid rgba(255, 255, 255, 0.15);
+      border: 1px solid var(--glass-border);
     }
-    #previewBox iframe {
+    .drive-container iframe {
       width: 100%;
       height: 480px;
       border: 0;
     }
+    @media (max-width: 768px) {
+      .glass-panel { padding: 18px; }
+      .panel-header { flex-direction: column; align-items: flex-start; }
+      .q-text-hi { font-size: 1.05rem; }
+    }
   </style>
 </head>
 <body>
-  <!-- Header -->
-  <header>
-    <nav>
-      <div class="logo">🌟 Pankaj Kumar 🌟</div>
-      <div class="search-box">
-        <input type="text" id="searchInput" placeholder="Search science hub...">
-      </div>
-      <ul id="menuList">
-        <li><a href="index.html">🏠 Home</a></li>
-        <li><a href="about.html">👤 About</a></li>
-        <li><a href="books.html">📚 12th Books</a></li>
-        <li><a href="modelspaper.html">🗞️ Model Papers</a></li>
-      </ul>
-    </nav>
-  </header>
+  <!-- Header Component injected by layout.js -->
+  <div id="portal-header"></div>
 
-  <!-- SPLASH -->
+  <!-- SPLASH SCREEN -->
   <div id="splash">
-    <div id="splashLogo">Pankaj Notes</div>
+    <div id="splashLogo">Pankaj Science Hub</div>
   </div>
 
-  <!-- LOGIN -->
+  <!-- LOGIN GATE -->
   <div id="loginPage">
     <div class="loginBox">
-      <h2>Welcome to Science Hub</h2>
-      <input class="loginInput" id="user" placeholder="Apna naam daalein" />
-      <button class="loginBtn" onclick="loginNow()">Continue</button>
+      <h2 style="font-family:'Outfit',sans-serif; margin-bottom:6px;">Welcome to Science Hub</h2>
+      <p style="color:#94a3b8; font-size:0.9rem;">Apna naam daalkar study center unlock karein</p>
+      <input class="loginInput" id="userNameInput" placeholder="Apna naam likhein..." />
+      <button class="loginBtn" onclick="unlockHub()">Continue ➔</button>
     </div>
   </div>
 
-  <!-- MAIN CONTENT -->
-  <div id="mainContent" style="display:none;">
-    <div id="mainLogo">📘 Pankaj Science Hub</div>
-    <div class="sci-container">
-      <h1>12th Science Notes & Subjects</h1>
-      <p class="lead">Subjects, Notes, VVI Question Bank & Drive Preview — सब कुछ एक ही जगह।</p>
-      
-      <!-- SUBJECT CARDS (Clickable directly to each subject page!) -->
-      <div class="subjectGrid">
-        <a href="che.html" class="subCard">
-          <div class="subIcon">🧪</div>
-          <div class="subTitle">Chemistry</div>
-          <div class="subSub">VVI & 2026 Master Plan</div>
-        </a>
-        <a href="math.html" class="subCard">
-          <div class="subIcon">📐</div>
-          <div class="subTitle">Maths</div>
-          <div class="subSub">VVI Questions & Formulas</div>
-        </a>
-        <a href="bio.html" class="subCard">
-          <div class="subIcon">🧬</div>
-          <div class="subTitle">Biology</div>
-          <div class="subSub">Top Questions & Diagrams</div>
-        </a>
-        <a href="phy.html" class="subCard">
-          <div class="subIcon">⚡</div>
-          <div class="subTitle">Physics</div>
-          <div class="subSub">VVI Questions & Laws</div>
-        </a>
+  <!-- MAIN HUB CONTENT -->
+  <main id="mainContent" style="display:none;" class="hub-wrapper">
+    <div class="hub-hero">
+      <h1 class="hub-title">📘 12th Unified Science & Subject Hub</h1>
+      <p class="hub-subtitle">BSEB 2026 परीक्षा के लिए विशेषज्ञों द्वारा अनुशंसित VVI प्रश्न बैंक, मास्टर प्लान और स्टडी नोट्स।</p>
+    </div>
+
+    <!-- SUBJECT TABS -->
+    <div class="subject-nav-tabs">
+      <button class="tab-btn active" onclick="switchSubject('chemistry')">🧪 Chemistry</button>
+      <button class="tab-btn" onclick="switchSubject('physics')">⚡ Physics</button>
+      <button class="tab-btn" onclick="switchSubject('mathematics')">📐 Mathematics</button>
+      <button class="tab-btn" onclick="switchSubject('biology')">🧬 Biology</button>
+      <button class="tab-btn" onclick="switchSubject('hindi')">📖 Hindi</button>
+      <button class="tab-btn" onclick="switchSubject('english')">📚 English</button>
+      <button class="tab-btn" onclick="switchSubject('cuet')">⚛️ CUET PYQs</button>
+      <button class="tab-btn" onclick="switchSubject('drive')">📂 Notes Drive</button>
+    </div>
+
+    <!-- SUBJECT PANEL -->
+    <div class="glass-panel" id="subjectPanel">
+      <div class="panel-header">
+        <div>
+          <h2 class="panel-title" id="panelTitle">🧪 12th Chemistry VVI & Master Plan</h2>
+          <p style="color:var(--muted); font-size:0.9rem;" id="panelSubtitle">BSEB Class 12th High Demand Subjective & Objective Questions</p>
+        </div>
+        <div class="panel-meta">
+          <span class="progress-badge" id="progressBadge">Mastered: 0/15</span>
+          <a href="che.html" class="action-link" id="deepLinkBtn">Open Full Chemistry View ➔</a>
+        </div>
       </div>
 
-      <!-- NOTES OPENER -->
-      <section class="card">
-        <div class="icon">📂</div>
-        <div class="meta">
-          <h2>Notes Drive Folder</h2>
-          <p>12th Science 🧪 Complete Notes Collection</p>
-        </div>
-        <div class="actions">
-          <button class="btn" onclick="openDrive()">Open in Drive</button>
-        </div>
-      </section>
+      <!-- QUESTIONS CONTAINER -->
+      <div class="question-list" id="questionList">
+        <!-- Rendered via JavaScript -->
+      </div>
 
-      <!-- DRIVE PREVIEW -->
-      <div id="previewBox">
+      <!-- EMBEDDED DRIVE VIEW (When drive tab is active) -->
+      <div id="driveView" style="display:none;" class="drive-container">
         <iframe src="https://drive.google.com/embeddedfolderview?id=1DuC15qv6YUK8IJpPqiF0jXI1Sd7C3nCT#list"></iframe>
       </div>
     </div>
-  </div>
+  </main>
 
+  <!-- Footer Component injected by layout.js -->
+  <div id="portal-footer"></div>
+
+  <!-- SUBJECTS DATA & CONTROLLER SCRIPT -->
   <script>
-    function loginNow() {
-      let name = document.getElementById("user").value.trim();
-      if (name.length < 2) {
-        alert("Kripya apna sahi naam darj karein");
+    const SUBJECT_DATA = {
+      chemistry: {
+        title: "🧪 12th Chemistry VVI & Master Plan",
+        subtitle: "10 वर्षों के बोर्ड पेपर्स के आधार पर चुने गए VVI प्रश्न (Physical, Inorganic & Organic)",
+        deepLink: "che.html",
+        deepLinkLabel: "Open Dedicated Chemistry ➔",
+        questions: [
+          {
+            category: "Physical Chemistry",
+            chance: "98%",
+            qHi: "प्रथम कोटि की अभिक्रिया (First Order Reaction) क्या है? इसके लिए वेग स्थिरांक का व्यंजक प्राप्त करें।",
+            qEn: "What is a First Order Reaction? Derive an expression for its rate constant.",
+            hint: "k = (2.303 / t) * log(a / (a - x))। दर अभिकर्मक की सांद्रता के प्रथम घात के समानुपाती होती है।"
+          },
+          {
+            category: "Inorganic Chemistry",
+            chance: "95%",
+            qHi: "हैबर विधि द्वारा अमोनिया (NH₃) के निर्माण के सिद्धांत, चित्र एवं विधि का वर्णन करें।",
+            qEn: "Describe the manufacture of Ammonia by Haber's Process with principle and diagram.",
+            hint: "N₂ + 3H₂ ⇌ 2NH₃ + 22.4 kcal। अनुकूल परिस्थितियां: 200 atm दाब, 450-500°C ताप, Fe उत्प्रेरक एवं Mo वर्धक।"
+          },
+          {
+            category: "Physical Chemistry",
+            chance: "96%",
+            qHi: "राउल्ट के नियम (Raoult's Law) को लिखें तथा आदर्श और अनादर्श विलयन में अंतर स्पष्ट करें।",
+            qEn: "State Raoult's Law. Differentiate between Ideal and Non-ideal solutions.",
+            hint: "P₁ = x₁ * P₁°। आदर्श विलयन राउल्ट के नियम का पूर्ण पालन करते हैं (ΔH_mix = 0, ΔV_mix = 0)।"
+          },
+          {
+            category: "Inorganic Chemistry",
+            chance: "92%",
+            qHi: "समुद्री घास (Sea weeds) से आयोडीन (Iodine) का निष्कर्षण कैसे किया जाता है?",
+            qEn: "How is Iodine extracted from Sea weeds (Laminaria digitata)?",
+            hint: "समुद्री घास को जलाकर केल्प (Kelp) बनाया जाता है, जिसमें 0.5% आयोडीन आयोडाइड के रूप में होता है।"
+          },
+          {
+            category: "Organic Chemistry",
+            chance: "97%",
+            qHi: "SN1 और SN2 अभिक्रिया क्रियाविधि में अंतर स्पष्ट करें।",
+            qEn: "Differentiate between SN1 and SN2 reaction mechanisms with examples.",
+            hint: "SN1 दो पदों में होती है (कार्बोकैटायन बनता है, 3° > 2° > 1°)। SN2 एक ही पद में संक्रमण अवस्था के साथ होती है।"
+          },
+          {
+            category: "Organic Chemistry",
+            chance: "99%",
+            qHi: "एल्डोल संघनन (Aldol Condensation) एवं कैनिजारो अभिक्रिया (Cannizzaro Reaction) को समझाएं।",
+            qEn: "Explain Aldol Condensation and Cannizzaro Reaction with equations.",
+            hint: "एल्डोल में α-हाइड्रोजन आवश्यक है (तनु NaOH)। कैनिजारो में α-हाइड्रोजन नहीं होता (50% KOH, फॉर्मेल्डिहाइड)।"
+          }
+        ]
+      },
+      physics: {
+        title: "⚡ 12th Physics VVI Question Bank",
+        subtitle: "Electrostatics, Optics, Magnetism & Modern Physics VVI 5-Marks & 2-Marks",
+        deepLink: "phy.html",
+        deepLinkLabel: "Open Dedicated Physics ➔",
+        questions: [
+          {
+            category: "Electrostatics",
+            chance: "99%",
+            qHi: "गॉस का प्रमेय (Gauss's Theorem) लिखें एवं इसे सिद्ध करें। इसके उपयोग से समतल आवेशित चालक के समीप विद्युत क्षेत्र ज्ञात करें।",
+            qEn: "State and prove Gauss's Theorem in electrostatics. Find electric field near charged conductor.",
+            hint: "∮ E · dA = q_enclosed / ε₀। गोलीय गाउसीय पृष्ठ मानकर फ्लक्स का समाकलन करें।"
+          },
+          {
+            category: "Wave Optics",
+            chance: "95%",
+            qHi: "हाइगेन्स के तरंग सिद्धांत (Huygens' Principle) के आधार पर प्रकाश के अपवर्तन अथवा परावर्तन के नियमों को सिद्ध करें।",
+            qEn: "Verify laws of reflection or refraction using Huygens' secondary wavelet principle.",
+            hint: "तरंगाग्र (Wavefront) पर प्रत्येक बिंदु एक नए विक्षोभ का स्रोत बनता है। sin i / sin r = v₁ / v₂ = μ।"
+          },
+          {
+            category: "Electromagnetism",
+            chance: "94%",
+            qHi: "बायो-सावर्ट का नियम (Biot-Savart Law) लिखें एवं किसी वृत्ताकार धारावाही कुंडली के अक्ष पर चुंबकीय क्षेत्र का व्यंजक प्राप्त करें।",
+            qEn: "State Biot-Savart Law and derive expression for magnetic field at axis of circular loop.",
+            hint: "dB = (μ₀ / 4π) * (I dl sin θ / r²)। अक्ष पर B = (μ₀ N I R²) / [2(R² + x²)^(3/2)]।"
+          },
+          {
+            category: "Ray Optics",
+            chance: "96%",
+            qHi: "लेंस निर्माता का सूत्र (Lens Maker's Formula) व्युत्पन्न करें।",
+            qEn: "Derive Lens Maker's Formula: 1/f = (μ - 1)(1/R₁ - 1/R₂).",
+            hint: "दो गोलीय अपवर्तक पृष्ठों पर अपवर्तन का सूत्र μ₂/v - μ₁/u = (μ₂ - μ₁)/R लगाकर दोनों समीकरण जोड़ें।"
+          }
+        ]
+      },
+      mathematics: {
+        title: "📐 12th Mathematics VVI Question Bank",
+        subtitle: "Calculus, Vectors, 3D Geometry, Probability & Matrices Target 100/100",
+        deepLink: "math.html",
+        deepLinkLabel: "Open Dedicated Mathematics ➔",
+        questions: [
+          {
+            category: "Calculus (Integration)",
+            chance: "98%",
+            qHi: "निश्चित समाकलन (Definite Integral) का मान ज्ञात करें: ∫[0 to π/2] (√sin x) / (√sin x + √cos x) dx।",
+            qEn: "Evaluate the definite integral ∫[0 to π/2] (√sin x) / (√sin x + √cos x) dx.",
+            hint: "प्रॉपर्टी लगाएँ: ∫[0 to a] f(x) dx = ∫[0 to a] f(a - x) dx। जोड़ने पर 2I = π/2, इसलिए I = π/4।"
+          },
+          {
+            category: "Differential Calculus",
+            chance: "95%",
+            qHi: "यदि y = (sin x)^(cos x) + (cos x)^(sin x), तो dy/dx ज्ञात करें।",
+            qEn: "If y = (sin x)^(cos x) + (cos x)^(sin x), find dy/dx.",
+            hint: "y = u + v मानकर दोनों पक्षों में अलग-अलग log लें और अवकलन करें।"
+          },
+          {
+            category: "Vector & 3D Geometry",
+            chance: "96%",
+            qHi: "दो रेखाओं के बीच की न्यूनतम दूरी (Shortest Distance) ज्ञात करें: r = a₁ + λb₁ तथा r = a₂ + μb₂।",
+            qEn: "Derive formula for shortest distance between two skew lines.",
+            hint: "d = |(b₁ × b₂) · (a₂ - a₁)| / |b₁ × b₂|।"
+          }
+        ]
+      },
+      biology: {
+        title: "🧬 12th Biology Top VVI Questions",
+        subtitle: "Genetics, Reproduction, Biotechnology & Ecology with Diagrams",
+        deepLink: "bio.html",
+        deepLinkLabel: "Open Dedicated Biology ➔",
+        questions: [
+          {
+            category: "Genetics & Evolution",
+            chance: "98%",
+            qHi: "डीएनए प्रतिकृतिकरण (DNA Replication) की अर्ध-संरक्षी प्रकृति को मेसल्सन और स्टाल के प्रयोग द्वारा समझाएं।",
+            qEn: "Explain semiconservative replication of DNA proven by Meselson and Stahl experiment.",
+            hint: "¹⁵N भारी आइसोटोप और ¹⁴N सामान्य नाइट्रोजन का प्रयोग किया। CsCl घनत्व प्रवणता में सेंट्रीफ्यूजेशन।"
+          },
+          {
+            category: "Reproduction in Organisms",
+            chance: "95%",
+            qHi: "आवृतबीजी पौधों में द्विनिषेचन (Double Fertilization) एवं त्रिसंलयन (Triple Fusion) का सचित्र वर्णन करें।",
+            qEn: "Describe double fertilization and triple fusion in Angiospermic plants with diagram.",
+            hint: "एक नर युग्मक + अंड = युग्मनज (2n)। दूसरा नर युग्मक + द्वितीयक केंद्रक (2n) = प्राथमिक भ्रूणपोष केंद्रक (3n)।"
+          },
+          {
+            category: "Biotechnology",
+            chance: "94%",
+            qHi: "पुनर्योगज डीएनए तकनीक (Recombinant DNA Technology) के मुख्य चरणों का रेखाचित्र सहित वर्णन करें।",
+            qEn: "List steps involved in recombinant DNA technology (Genetic Engineering).",
+            hint: "डीएनए का पृथक्करण -> प्रतिबंध एंजाइम (Restriction Enzyme) से विखंडन -> जेल वैद्युतकणसंचलन -> प्लास्मिड में जोड़ना।"
+          }
+        ]
+      },
+      hindi: {
+        title: "📖 12th Hindi VVI Questions & Mission 2026",
+        subtitle: "गद्य खंड, पद्य खंड, सप्रसंग व्याख्या, निबंध एवं व्याकरण संग्रह",
+        deepLink: "hindi.html",
+        deepLinkLabel: "Open Dedicated Hindi ➔",
+        questions: [
+          {
+            category: "गद्य खंड (Prose)",
+            chance: "97%",
+            qHi: "'बातचीत' शीर्षक निबंध का सारांश अपने शब्दों में लिखें तथा इसके लेखक बालकृष्ण भट्ट के विचारों को स्पष्ट करें।",
+            qEn: "Summary of the essay 'Baat-cheet' by Balkrishna Bhatt.",
+            hint: "बातचीत मनुष्य को वाक्शक्ति द्वारा ईश्वर का वरदान है। असल बातचीत सिर्फ दो व्यक्तियों में हो सकती है।"
+          },
+          {
+            category: "पद्य खंड (Poetry)",
+            chance: "95%",
+            qHi: "'कड़बक' कविता में मलिक मोहम्मद जायसी ने अपने रूपहीन होने के बारे में क्या कहा है?",
+            qEn: "Analysis of Malik Mohammad Jayasi's 'Kadbakk' on physical beauty vs internal virtues.",
+            hint: "जायसी एक आँख के काने थे लेकिन उनकी कविता में ऐसी मिठास थी कि जिसने सुना वह मोहित हो गया। गुण रूप से बड़ा होता है।"
+          },
+          {
+            category: "सप्रसंग व्याख्या",
+            chance: "94%",
+            qHi: "'जिस पुरुष में नारीत्व नहीं, अपूर्ण है।' - इस पंक्ति का भाव 'अर्धनारीश्वर' पाठ के आधार पर स्पष्ट करें।",
+            qEn: "Explain context from 'Ardhnarishwar' by Ramdhari Singh Dinkar.",
+            hint: "दिनकर जी के अनुसार नर और नारी पूर्ण रूप से समान हैं। पुरुष में कोमलता और दया होना कमजोरी नहीं, पूर्णता है।"
+          }
+        ]
+      },
+      english: {
+        title: "📚 12th English Exam Predictor 2026",
+        subtitle: "Rainbow Part-2: Prose & Poetry Summary, Grammar & Explanation",
+        deepLink: "english.html",
+        deepLinkLabel: "Open Dedicated English ➔",
+        questions: [
+          {
+            category: "Prose Summary",
+            chance: "98%",
+            qHi: "Write a short summary of 'Indian Civilization and Culture' by Mahatma Gandhi.",
+            qEn: "Summary of 'Indian Civilization and Culture' by Mahatma Gandhi.",
+            hint: "Gandhi compares Indian civilization with Western civilization. Indian civilization elevates moral being, whereas Western civilization propagates materialism."
+          },
+          {
+            category: "Poetry Section",
+            chance: "96%",
+            qHi: "Write a critical appreciation of the poem 'Sweetest Love I Do Not Goe' by John Donne.",
+            qEn: "Critical appreciation of 'Sweetest Love I Do Not Goe'.",
+            hint: "Metaphysical love poem. The poet assures his beloved that his departure is not due to weariness, but rehearsal of death."
+          }
+        ]
+      },
+      cuet: {
+        title: "⚛️ CUET Physics PYQ & Topic Distribution",
+        subtitle: "Comprehensive Previous Year Questions & Solutions for CUET-UG Examination",
+        deepLink: "cuet-ug-phy.html",
+        deepLinkLabel: "Open Dedicated CUET Physics ➔",
+        questions: [
+          {
+            category: "Current Electricity",
+            chance: "99%",
+            qHi: "A potentiometer wire has length 4m and resistance 8Ω. What resistance must be connected in series with a 2V accumulator?",
+            qEn: "CUET PYQ on Potentiometer calibration and potential gradient calculation.",
+            hint: "Potential gradient k = V / L. Total resistance R_total = R_wire + R_series."
+          },
+          {
+            category: "Optics & Modern Physics",
+            chance: "95%",
+            qHi: "De Broglie wavelength of an electron accelerated through potential difference V is given by:",
+            qEn: "Relation between accelerating potential V and De Broglie wavelength.",
+            hint: "λ = h / √(2 m q V) = 1.227 / √V nm."
+          }
+        ]
+      }
+    };
+
+    let currentSubject = 'chemistry';
+    let masteredState = {};
+
+    try {
+      masteredState = JSON.parse(localStorage.getItem('pankaj_science_mastered') || '{}');
+    } catch(e) {}
+
+    function unlockHub() {
+      const name = document.getElementById('userNameInput').value.trim();
+      if (!name) {
+        alert('Kripya apna naam darj karein!');
         return;
       }
-      document.getElementById("loginPage").style.display = "none";
-      document.getElementById("mainContent").style.display = "block";
+      localStorage.setItem('pankaj_student_name', name);
+      document.getElementById('loginPage').style.display = 'none';
+      document.getElementById('mainContent').style.display = 'block';
+      renderCurrentSubject();
     }
 
-    function openDrive() {
-      window.open("https://drive.google.com/drive/folders/1DuC15qv6YUK8IJpPqiF0jXI1Sd7C3nCT", "_blank");
+    function switchSubject(subjectKey) {
+      currentSubject = subjectKey;
+      
+      // Update Tab Buttons
+      const buttons = document.querySelectorAll('.tab-btn');
+      buttons.forEach(btn => {
+        if (btn.textContent.toLowerCase().includes(subjectKey.substring(0, 4))) {
+          btn.classList.add('active');
+        } else {
+          btn.classList.remove('active');
+        }
+      });
+
+      renderCurrentSubject();
     }
+
+    function renderCurrentSubject() {
+      const panelTitle = document.getElementById('panelTitle');
+      const panelSubtitle = document.getElementById('panelSubtitle');
+      const deepLinkBtn = document.getElementById('deepLinkBtn');
+      const questionList = document.getElementById('questionList');
+      const driveView = document.getElementById('driveView');
+      const progressBadge = document.getElementById('progressBadge');
+
+      if (currentSubject === 'drive') {
+        panelTitle.textContent = "📂 12th Science Notes Drive Folder";
+        panelSubtitle.textContent = "Direct Google Drive folder preview containing all PDF chapters & handwritten notes.";
+        deepLinkBtn.href = "https://drive.google.com/drive/folders/1DuC15qv6YUK8IJpPqiF0jXI1Sd7C3nCT";
+        deepLinkBtn.target = "_blank";
+        deepLinkBtn.textContent = "Open in Google Drive ➔";
+        questionList.style.display = "none";
+        driveView.style.display = "block";
+        progressBadge.textContent = "Drive Preview";
+        return;
+      }
+
+      questionList.style.display = "flex";
+      driveView.style.display = "none";
+
+      const data = SUBJECT_DATA[currentSubject];
+      if (!data) return;
+
+      panelTitle.textContent = data.title;
+      panelSubtitle.textContent = data.subtitle;
+      deepLinkBtn.href = data.deepLink;
+      deepLinkBtn.target = "_self";
+      deepLinkBtn.textContent = data.deepLinkLabel;
+
+      // Count Mastered
+      let countMastered = 0;
+      data.questions.forEach((_, idx) => {
+        const key = currentSubject + '_' + idx;
+        if (masteredState[key]) countMastered++;
+      });
+      progressBadge.textContent = `Mastered: ${countMastered}/${data.questions.length}`;
+
+      // Render Questions
+      let html = '';
+      data.questions.forEach((q, idx) => {
+        const key = currentSubject + '_' + idx;
+        const isMastered = !!masteredState[key];
+        html += `
+          <div class="q-card" id="card_${key}">
+            <div class="q-header">
+              <span class="q-category">${q.category}</span>
+              <span class="q-chance">Chance: ${q.chance}</span>
+            </div>
+            <div class="q-text-hi">${q.qHi}</div>
+            <div class="q-text-en">${q.qEn}</div>
+            <div class="q-footer">
+              <button class="hint-btn" onclick="toggleHint('${key}')">💡 Show Hints / Key Points</button>
+              <button class="learn-btn ${isMastered ? 'learned' : ''}" onclick="toggleMastered('${key}', this)">
+                ${isMastered ? '✓ Mastered' : '○ Mark Learned'}
+              </button>
+            </div>
+            <div class="hint-box" id="hint_${key}">
+              <strong>Key Points / Formulas:</strong><br>
+              ${q.hint}
+            </div>
+          </div>
+        `;
+      });
+      questionList.innerHTML = html;
+    }
+
+    function toggleHint(key) {
+      const box = document.getElementById('hint_' + key);
+      if (box) box.classList.toggle('show');
+    }
+
+    function toggleMastered(key, btn) {
+      masteredState[key] = !masteredState[key];
+      try {
+        localStorage.setItem('pankaj_science_mastered', JSON.stringify(masteredState));
+      } catch(e) {}
+      
+      if (masteredState[key]) {
+        btn.classList.add('learned');
+        btn.textContent = '✓ Mastered';
+      } else {
+        btn.classList.remove('learned');
+        btn.textContent = '○ Mark Learned';
+      }
+
+      // Update badge
+      const data = SUBJECT_DATA[currentSubject];
+      if (data) {
+        let count = 0;
+        data.questions.forEach((_, idx) => {
+          if (masteredState[currentSubject + '_' + idx]) count++;
+        });
+        document.getElementById('progressBadge').textContent = `Mastered: ${count}/${data.questions.length}`;
+      }
+    }
+
+    // Auto-login if previously entered
+    document.addEventListener('DOMContentLoaded', () => {
+      const savedName = localStorage.getItem('pankaj_student_name');
+      if (savedName) {
+        document.getElementById('userNameInput').value = savedName;
+        document.getElementById('loginPage').style.display = 'none';
+        document.getElementById('mainContent').style.display = 'block';
+        renderCurrentSubject();
+      }
+    });
   </script>
-  <script src="/assets/js/search.js"></script>
+  <script src="/assets/js/layout.js"></script>
 </body>
 </html>

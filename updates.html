@@ -190,22 +190,7 @@ nav ul li a:hover{
 
 <body>
 
-<header>
-<nav>
-  <div class="logo">🌟 Pankaj Kumar 🌟</div>
-
-  <div class="search-box">
-    <input type="text" id="searchInput" placeholder="Search here...">
-  </div>
-
-  <ul id="menuList">
-    <li><a href="index.html">Home</a></li>
-    <li><a href="about.html">About</a></li>
-    <li><a href="#">YouTube</a></li>
-    <li><a href="#">Contact</a></li>
-  </ul>
-</nav>
-</header>
+<div id="portal-header"></div>
 
 <!-- ===== LOGIN GATE ===== -->
 <div class="gate-wrap" id="authGate">
@@ -259,43 +244,7 @@ nav ul li a:hover{
 
 <div class="lightbox" id="lightbox"><img id="lightboxImg" src="" alt="photo"></div>
 
-<script>
-/* 🔍 SAFE SEARCH SYSTEM (RED BLINK) */
-(function(){
-  const search = document.getElementById("searchInput");
-  const menuItems = document.querySelectorAll("#menuList li");
-  const blocks = document.querySelectorAll("header, nav, li, a");
 
-  let last = null;
-
-  search.addEventListener("input", function(){
-    const q = this.value.toLowerCase().trim();
-
-    /* MENU FILTER */
-    menuItems.forEach(li=>{
-      li.style.display = li.innerText.toLowerCase().includes(q) ? "" : "none";
-    });
-
-    /* REMOVE OLD HIGHLIGHT */
-    if(last){
-      last.classList.remove("search-blink-red");
-      last = null;
-    }
-
-    if(!q) return;
-
-    /* CONTENT SEARCH */
-    for(const el of blocks){
-      if(el.innerText && el.innerText.toLowerCase().includes(q)){
-        el.classList.add("search-blink-red");
-        el.scrollIntoView({behavior:"smooth",block:"center"});
-        last = el;
-        break;
-      }
-    }
-  });
-})();
-</script>
 
 
 
@@ -725,5 +674,7 @@ document.addEventListener("click", function () {
 }, true);
 </script>
 
+  <div id="portal-footer"></div>
+  <script src="/assets/js/layout.js"></script>
 </body>
 </html>
